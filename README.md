@@ -33,8 +33,8 @@ This project is designed to teach your team modern web automation testing throug
 
 ### 1. Clone and Install
 ```bash
-git clone <repository-url>
-cd web-automation-testing-sandbox
+git clone https://github.com/gpais-nd/automation-sandbox.git
+cd automation-sandbox
 npm install
 ```
 
