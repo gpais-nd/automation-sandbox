@@ -1,29 +1,29 @@
-## Descripción
-Breve descripción de los cambios realizados
+## Description
+Brief description of changes
 
-## Tipo de Cambio
-- [ ] Bug fix (corrección de errores)
-- [ ] Nueva funcionalidad
-- [ ] Cambio que rompe compatibilidad
-- [ ] Actualización de documentación
-- [ ] Refactoring de código
-- [ ] Nuevos tests
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
+- [ ] Code refactoring
+- [ ] New tests
 
 ## Testing
-- [ ] Tests unitarios pasan
-- [ ] Tests E2E pasan
-- [ ] Testing manual completado
-- [ ] Tests de regresión ejecutados
+- [ ] Unit tests pass
+- [ ] E2E tests pass
+- [ ] Manual testing completed
+- [ ] Regression tests executed
 
 ## Checklist
-- [ ] El código sigue las guías de estilo del proyecto
-- [ ] Auto-revisión del código completada
-- [ ] Documentación actualizada (si aplica)
-- [ ] Sin conflictos de merge
-- [ ] Commits siguen la convención establecida
+- [ ] Code follows style guidelines
+- [ ] Self-review completed
+- [ ] Documentation updated (if applicable)
+- [ ] No merge conflicts
+- [ ] Commits follow convention
 
-## Capturas de pantalla (si aplica)
-<!-- Agregar capturas de pantalla para cambios visuales -->
+## Screenshots (if applicable)
+<!-- Add screenshots for visual changes -->
 
-## Notas adicionales
-<!-- Cualquier información adicional relevante para los revisores -->
+## Additional Notes
+<!-- Any additional information relevant for reviewers -->
