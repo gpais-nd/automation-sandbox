@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Home, CheckSquare, User } from 'lucide-react'
+import { Home, CheckSquare, User, ShoppingCart, Settings, Cloud, BarChart3 } from 'lucide-react'
 
 export function Navigation() {
   const location = useLocation()
@@ -7,7 +7,10 @@ export function Navigation() {
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
     { path: '/todos', label: 'Todo List', icon: CheckSquare },
-    { path: '/profile', label: 'Profile', icon: User },
+    { path: '/cart', label: 'Shopping Cart', icon: ShoppingCart },
+    { path: '/settings', label: 'Settings', icon: Settings },
+    { path: '/weather', label: 'Weather', icon: Cloud },
+    { path: '/dashboard', label: 'Dashboard', icon: BarChart3 },
   ]
 
   return (
