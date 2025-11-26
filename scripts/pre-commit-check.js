@@ -1,12 +1,6 @@
 #!/usr/bin/env node
 
-/**
- * Pre-commit Test Validation
- * 
- * Ejecuta validaciones antes de hacer commit para asegurar calidad.
- */
-
-const { execSync } = require('child_process')
+import { execSync } from 'child_process'
 
 function runPreCommitChecks() {
   console.log('\n🔍 PRE-COMMIT VALIDATION CHECKS\n')
@@ -24,7 +18,7 @@ function runPreCommitChecks() {
     },
     {
       name: 'Unit Tests',
-      command: 'npm run test:unit-only',
+      command: 'npm run test:unit-only -- --run',
       required: true
     },
     {

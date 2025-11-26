@@ -1,24 +1,15 @@
 #!/usr/bin/env node
 
-/**
- * Test Implementation Validator
- * 
- * Valida que los tests implementados cumplan con los estándares y mejores prácticas.
- */
-
-const fs = require('fs')
-const { execSync } = require('child_process')
+import fs from 'fs'
+import { execSync } from 'child_process'
 
 const validationRules = {
-  // Test structure rules
   hasDescribeBlock: /describe\(/,
   hasTestCases: /test\(/,
   hasAssertions: /expect\(/,
   hasTestIds: /getByTestId|data-testid/,
   hasUserInteractions: /click|type|fill|tap/,
   hasWaitForElements: /waitFor|toBeVisible|toBeInTheDocument/,
-  
-  // Best practices
   noHardcodedValues: /(?<!\/\/.*)(?<!'.*)'[^']*\d{4,}[^']*'/,
   hasDescriptiveNames: /test\(['"`][A-Z].*should.*['"`]/,
   hasProperCleanup: /afterEach|beforeEach/
@@ -36,7 +27,6 @@ function validateTestFile(filePath) {
     score: 0
   }
   
-  // Check basic structure
   if (validationRules.hasDescribeBlock.test(content)) {
     results.passed.push('✅ Has describe blocks')
   } else {
@@ -55,7 +45,6 @@ function validateTestFile(filePath) {
     results.failed.push('❌ No assertions found')
   }
   
-  // Check testing best practices
   if (validationRules.hasTestIds.test(content)) {
     results.passed.push('✅ Uses test IDs')
   } else {
@@ -74,7 +63,6 @@ function validateTestFile(filePath) {
     results.warnings.push('⚠️  Consider adding wait conditions')
   }
   
-  // Calculate score
   const totalChecks = results.passed.length + results.failed.length + results.warnings.length
   results.score = Math.round((results.passed.length / totalChecks) * 100)
   
@@ -108,7 +96,6 @@ function runTestValidation() {
     }
   })
   
-  // Run actual tests to verify they pass
   console.log('🧪 RUNNING TESTS TO VERIFY IMPLEMENTATION...\n')
   
   try {
@@ -119,7 +106,6 @@ function runTestValidation() {
     
     console.log('✅ All tests are passing!')
     
-    // Extract test results
     const passedTests = (testOutput.match(/✓/g) || []).length
     const failedTests = (testOutput.match(/✗/g) || []).length
     

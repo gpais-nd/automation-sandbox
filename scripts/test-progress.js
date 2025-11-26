@@ -1,14 +1,10 @@
 #!/usr/bin/env node
 
-/**
- * Test Progress Tracker
- * 
- * Script que analiza todos los archivos de test y genera un reporte visual
- * del progreso de implementación de TODOs.
- */
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-const fs = require('fs')
-const path = require('path')
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const testFiles = [
   'tests/unit/TodoList.test.tsx',
@@ -24,13 +20,8 @@ const testFiles = [
 function analyzeTestFile(filePath) {
   const content = fs.readFileSync(filePath, 'utf8')
   
-  // Count implemented tests (not skipped)
   const implementedTests = (content.match(/test\(/g) || []).length
-  
-  // Count TODO tests (skipped)
   const todoTests = (content.match(/test\.skip\(/g) || []).length
-  
-  // Count total TODOs in comments
   const todoComments = (content.match(/\/\* TODO:/g) || []).length
   
   return {
@@ -78,7 +69,6 @@ function generateProgressReport() {
   console.log(`   📈 Total Tests: ${totalImplemented + totalTodos}`)
   console.log('')
   
-  // Recommendations
   if (overallProgress < 25) {
     console.log('💡 Recommendation: Start with TodoList.test.tsx (has most examples)')
   } else if (overallProgress < 50) {
