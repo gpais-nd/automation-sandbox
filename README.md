@@ -56,25 +56,101 @@ Analytics dashboard with interactive charts
   - ESLint extension
   - Prettier extension
 
-## 🚀 Installation & Setup
+## 🚀 Quick Start (15 minutes)
 
-### 1. Clone and Install
+> **New to automated testing?** Follow this guide to implement your first test!
+
+### ⚡ 5-Minute Setup
+
 ```bash
+# 1. Clone and install dependencies
 git clone https://github.com/gpais-nd/automation-sandbox.git
 cd automation-sandbox
 npm install
-```
-
-### 2. Install Playwright Browsers
-```bash
 npx playwright install
+
+# 2. Start the app
+npm run dev
+# ✅ App should open at http://localhost:5173
+
+# 3. Verify tests work
+npm test
+# ✅ Should see some tests passing
+
+# 4. Check your starting point
+npm run test:progress
+# ✅ Should show current progress (9 implemented, 78 TODOs)
 ```
 
-### 3. Start Development Server
+### 🎯 Your First Test (10 minutes)
+
+#### Step 1: Open the TodoList test file
 ```bash
-npm run dev
+# Open in VS Code
+code tests/unit/TodoList.test.tsx
 ```
-The application will be available at `http://localhost:5173`
+
+#### Step 2: Find your first TODO
+Look for this pattern:
+```typescript
+/* TODO: Implementar test para eliminar todo
+ * Debe verificar que al hacer click en delete se elimine el todo
+ * y se actualice el contador correctamente
+ */
+test.skip('should delete todo when delete button is clicked', async () => {
+  // const user = userEvent.setup()
+  // Implementar test aquí
+})
+```
+
+#### Step 3: Implement the test
+1. **Remove** `.skip` from the test
+2. **Uncomment** the code inside
+3. **Follow the pattern** from the examples above
+
+```typescript
+test('should delete todo when delete button is clicked', async () => {
+  const user = userEvent.setup()
+  
+  render(<TodoList />)
+  
+  // Add a todo first
+  await user.type(screen.getByTestId('todo-input'), 'Test todo')
+  await user.click(screen.getByTestId('add-todo-btn'))
+  
+  // Verify todo exists
+  expect(screen.getByTestId('todo-item')).toBeInTheDocument()
+  
+  // Delete the todo
+  await user.click(screen.getByTestId('delete-todo-btn'))
+  
+  // Verify todo is gone
+  expect(screen.queryByTestId('todo-item')).not.toBeInTheDocument()
+})
+```
+
+#### Step 4: Run and validate
+```bash
+# Run the specific test
+npm test -- TodoList.test.tsx
+
+# Validate your implementation
+npm run test:validate
+
+# Check progress
+npm run test:progress
+```
+
+### 🎉 Congratulations!
+
+You just implemented your first automated test! 
+
+**What you learned:**
+- ✅ How to find and implement TODOs
+- ✅ Basic test structure (render, interact, assert)
+- ✅ Using test IDs for reliable element selection
+- ✅ User interactions with userEvent
+- ✅ Validation tools to ensure quality
 
 ## 🧪 Testing Commands
 
@@ -92,7 +168,7 @@ npm run test:coverage
 
 ### E2E Tests
 ```bash
-# Run E2E tests
+# Run all E2E tests
 npm run e2e
 
 # Run E2E tests with UI
@@ -100,6 +176,14 @@ npm run e2e:ui
 
 # Run E2E tests in headed mode (see browser)
 npm run e2e:headed
+
+# Run specific test suites
+npm run e2e:visual      # Visual regression tests
+npm run e2e:api         # API integration tests
+npm run e2e:mobile      # Mobile device tests (Chromium + WebKit only)
+
+# Update visual baselines
+npm run e2e:update-snapshots
 ```
 
 ### Code Quality
@@ -115,6 +199,21 @@ npm run format
 
 # Type check
 npm run type-check
+```
+
+### Test Validation & Progress
+```bash
+# Check implementation progress
+npm run test:progress
+
+# Validate test quality
+npm run test:validate
+
+# Run all pre-commit checks
+npm run test:check
+
+# Generate coverage report (opens in browser)
+npm run test:coverage
 ```
 
 ## 🌿 Git Workflow & Branch Strategy
@@ -204,8 +303,11 @@ tests/
 │   ├── WeatherDashboard.test.tsx # 1 ejemplo + 10 TODOs
 │   └── Dashboard.test.tsx     # 1 ejemplo + 11 TODOs
 └── e2e/                # E2E tests
-    ├── todo-flow.spec.ts
-    └── navigation.spec.ts
+    ├── visual-regression.spec.ts  # 1 ejemplo + 8 TODOs
+    ├── api-testing.spec.ts        # 1 ejemplo + 8 TODOs
+    ├── mobile-testing.spec.ts     # 1 ejemplo + 10 TODOs
+    ├── todo-flow.spec.ts          # Existing
+    └── navigation.spec.ts         # Existing
 ```
 
 ## 🎓 Learning Path
@@ -235,11 +337,17 @@ tests/
 - Explore `tests/e2e/` directory for Playwright
 - Practice cross-browser testing and page object patterns
 
-### Week 5: Advanced Testing and CI/CD
+### Week 5: Advanced Testing Patterns
+- Work on Visual Regression tests (`visual-regression.spec.ts`)
+- Implement API Testing TODOs (`api-testing.spec.ts`)
+- Practice Mobile Testing (`mobile-testing.spec.ts`)
+- Learn about screenshot comparisons and device emulation
+
+### Week 6: CI/CD and Test Optimization
 - Complete remaining TODOs across all test files
-- Mock API calls and external dependencies
 - Set up GitHub Actions workflows
 - Learn about test reporting and coverage
+- Optimize test performance and reliability
 
 ## 🧩 Testing Examples Included
 
@@ -375,42 +483,440 @@ npm run type-check
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 - [Testing Best Practices](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
 
-## 🎯 Next Steps
+## 🎯 Step-by-Step Implementation Guide
 
-1. **Set up the project locally**
-   ```bash
-   npm install
-   npx playwright install
-   npm run dev
-   ```
+### 📋 Initial Setup (One Time Only)
 
-2. **Run existing tests to understand the patterns**
-   ```bash
-   npm test          # Run unit tests
-   npm run test:ui   # Run tests with UI
-   npm run e2e       # Run E2E tests
-   ```
+```bash
+# 1. Clone and install dependencies
+git clone https://github.com/gpais-nd/automation-sandbox.git
+cd automation-sandbox
+npm install
+npx playwright install
 
-3. **Choose a TODO to implement**
-   - Start with TodoList (más ejemplos)
-   - Pick any TODO from any test file
-   - Remove `.skip` and implement the test
+# 2. Start development server
+npm run dev
 
-4. **Follow the pattern**
-   - Use the implemented examples as reference
-   - Follow the comments and hints in TODOs
-   - Test one functionality at a time
+# 3. Verify everything works
+npm test
+npm run e2e
+```
 
-5. **Validate your implementation**
-   ```bash
-   npm test -- --watch  # Run tests in watch mode
-   ```
+### 🔄 Development Workflow (For Each TODO)
 
-## 🏆 Challenge Goals
+#### **STEP 1: Check Current Progress**
+```bash
+npm run test:progress
+```
+✅ **What this does:** Shows visual progress bars and recommends which file to work on
 
-- **Beginner**: Implement 5 TODOs from any test files
-- **Intermediate**: Complete all TODOs from 2 test files
-- **Advanced**: Implement all 50+ TODOs across all test files
-- **Expert**: Add new test cases beyond the TODOs
+#### **STEP 2: Choose a TODO**
+- Start with `TodoList.test.tsx` (has most examples)
+- Open the test file and find a `test.skip()` with TODO comment
+- Read the TODO description and example code
+
+#### **STEP 3: Implement the Test**
+```bash
+# Run tests in watch mode while developing
+npm test -- --watch TodoList.test.tsx
+```
+1. Remove `.skip` from the test
+2. Uncomment the example code in the TODO
+3. Follow the pattern from implemented examples
+4. Save and see if test passes
+
+#### **STEP 4: Validate Implementation**
+```bash
+npm run test:validate
+```
+✅ **What this checks:**
+- Test structure is correct
+- Uses proper test IDs
+- Has user interactions
+- Follows best practices
+
+#### **STEP 5: Final Verification**
+```bash
+npm run test:check
+```
+✅ **What this verifies:**
+- TypeScript compiles
+- Code passes linting
+- All tests pass
+- Implementation quality is good
+
+#### **STEP 6: Commit Your Work**
+```bash
+git add .
+git commit -m "test(todo): implement toggle completion functionality"
+git push origin your-branch-name
+```
+
+---
+
+## 🧪 Testing Type-Specific Guides
+
+### 📱 **Unit Testing (React Components)**
+
+**Files to work on:** `tests/unit/*.test.tsx`
+
+**Step-by-step process:**
+```bash
+# 1. Check progress
+npm run test:progress
+
+# 2. Run specific test file in watch mode
+npm test -- --watch TodoList.test.tsx
+
+# 3. Implement TODO (remove .skip, uncomment code)
+# 4. Verify test passes
+
+# 5. Validate implementation
+npm run test:validate
+
+# 6. Check coverage if needed
+npm run test:coverage
+```
+
+**What you're testing:**
+- Component rendering
+- User interactions (click, type, select)
+- State changes
+- Form validation
+- Error handling
+
+**Key patterns to follow:**
+```typescript
+// ✅ Good: Use test IDs
+screen.getByTestId('add-todo-btn')
+
+// ✅ Good: Test user behavior
+await user.click(button)
+await user.type(input, 'text')
+
+// ✅ Good: Assert on behavior
+expect(screen.getByText('Todo added')).toBeInTheDocument()
+```
+
+### 🎨 **Visual Regression Testing**
+
+**File to work on:** `tests/e2e/visual-regression.spec.ts`
+
+**Step-by-step process:**
+```bash
+# 1. Run visual tests to see current state
+npm run e2e:visual
+
+# 2. Implement TODO (remove .skip, uncomment code)
+
+# 3. Generate baseline screenshots
+npm run e2e:update-snapshots
+
+# 4. Run tests to verify
+npm run e2e:visual
+
+# 5. Validate with all checks
+npm run test:check
+```
+
+**What you're testing:**
+- Page layouts remain consistent
+- Components look correct
+- Different themes work
+- Responsive design
+
+**Key patterns to follow:**
+```typescript
+// ✅ Wait for content to load
+await page.waitForSelector('[data-testid="chart-container"]')
+
+// ✅ Take full page screenshot
+await expect(page).toHaveScreenshot('dashboard.png')
+
+// ✅ Take component screenshot
+await expect(page.getByTestId('chart')).toHaveScreenshot('chart.png')
+```
+
+### 🔌 **API Testing**
+
+**File to work on:** `tests/e2e/api-testing.spec.ts`
+
+**Step-by-step process:**
+```bash
+# 1. Run API tests to see current state
+npm run e2e:api
+
+# 2. Implement TODO (remove .skip, uncomment code)
+
+# 3. Test with mocked responses
+npm run e2e:api
+
+# 4. Validate implementation
+npm run test:validate
+```
+
+**What you're testing:**
+- API success responses
+- Error handling
+- Loading states
+- Data validation
+- Network failures
+
+**Key patterns to follow:**
+```typescript
+// ✅ Mock API responses
+await page.route('/api/weather/*', route => {
+  route.fulfill({
+    status: 200,
+    body: JSON.stringify({ temperature: 22 })
+  })
+})
+
+// ✅ Test error scenarios
+await page.route('/api/weather/*', route => {
+  route.fulfill({ status: 500 })
+})
+
+// ✅ Verify UI updates
+await expect(page.getByTestId('temperature')).toContainText('22°')
+```
+
+### 📱 **Mobile Testing**
+
+**File to work on:** `tests/e2e/mobile-testing.spec.ts`
+
+**Step-by-step process:**
+```bash
+# 1. Run mobile tests to see current state
+npm run e2e:mobile
+
+# 2. Implement TODO (remove .skip, uncomment code)
+
+# 3. Test on different devices
+npm run e2e:mobile
+
+# 4. Validate implementation
+npm run test:check
+```
+
+**What you're testing:**
+- Touch interactions
+- Mobile layouts
+- Device orientations
+- Virtual keyboard
+- Swipe gestures
+
+**Key patterns to follow:**
+```typescript
+// ✅ Create mobile context
+const context = await browser.newContext({
+  ...devices['iPhone 13']
+})
+
+// ✅ Use click for better browser compatibility
+await page.getByTestId('button').click()
+
+// ✅ Test different orientations
+await page.setViewportSize({ width: 375, height: 667 })
+```
+
+---
+
+## 🔍 Test Validation & Quality Assurance
+
+### 🎯 Validation Tools
+
+#### 1. Progress Tracker
+```bash
+npm run test:progress
+```
+**What it does:** Shows visual progress bars, TODO counts, and recommendations
+
+#### 2. Implementation Validator
+```bash
+npm run test:validate
+```
+**What it validates:**
+- ✅ Test structure (describe, test, expect)
+- ✅ Test IDs usage
+- ✅ User interactions
+- ✅ Best practices compliance
+
+#### 3. Pre-commit Checker
+```bash
+npm run test:check
+```
+**What it verifies:**
+- 🔍 TypeScript compilation
+- 🔍 ESLint code quality
+- 🔍 All tests passing
+- 🔍 Implementation quality
+
+### 📋 Quality Checklist
+
+#### ✅ Test Structure
+- [ ] Uses `describe()` for grouping related tests
+- [ ] Descriptive test names explaining behavior
+- [ ] Follows AAA pattern (Arrange, Act, Assert)
+- [ ] Proper `expect()` assertions
+
+#### ✅ Element Selection
+- [ ] Uses `data-testid` for interactive elements
+- [ ] Prefers `getByTestId()` over CSS selectors
+- [ ] Uses `getByRole()` for semantic elements
+- [ ] Avoids fragile selectors
+
+#### ✅ User Interactions
+- [ ] Simulates real user interactions
+- [ ] Uses `userEvent` instead of `fireEvent`
+- [ ] Tests complete flows, not just renders
+- [ ] Verifies state changes after interactions
+
+#### ✅ Async Operations
+- [ ] Uses `waitFor()` for async operations
+- [ ] Tests loading states when applicable
+- [ ] Tests error handling
+- [ ] Avoids fixed timeouts
+
+### 🏆 Quality Scoring
+- **90-100%**: Excellent - Follows all best practices
+- **80-89%**: Good - Solid implementation with minor improvements
+- **70-79%**: Acceptable - Works but needs improvements
+- **<70%**: Needs work - Review implementation
+
+## 🚨 Troubleshooting Guide
+
+### ❌ "Test is failing"
+```bash
+# 1. Check for syntax errors
+npm run type-check
+
+# 2. Run specific test with details
+npm test -- TodoList.test.tsx --reporter=verbose
+
+# 3. Check if you're following the pattern
+# Compare with implemented examples in the same file
+```
+
+### ❌ "Low validation score"
+```bash
+# 1. Run validator to see specific issues
+npm run test:validate
+
+# 2. Common fixes:
+# - Add data-testid to elements
+# - Use user interactions (click, type)
+# - Add proper assertions (expect)
+# - Use descriptive test names
+```
+
+### ❌ "E2E tests not working"
+```bash
+# 1. Make sure dev server is running
+npm run dev
+
+# 2. Install browsers if needed
+npx playwright install
+
+# 3. Run in headed mode to see what's happening
+npm run e2e:headed
+```
+
+### ❌ "Mobile tests failing in Firefox"
+```bash
+# Mobile tests automatically skip Firefox (not supported)
+# Use these commands instead:
+npm run e2e:mobile          # Runs on Chromium + WebKit only
+npx playwright test tests/e2e/mobile-testing.spec.ts --project=chromium
+```
+
+### ❌ "Coverage too low"
+```bash
+# 1. Generate detailed coverage report
+npm run test:coverage
+
+# 2. Identify uncovered lines
+# 3. Add tests for missing functionality
+```
+
+---
+
+## 🎯 Quick Reference Commands
+
+```bash
+# 📊 Check your progress
+npm run test:progress
+
+# 🔍 Validate your implementation
+npm run test:validate
+
+# ✅ Run all checks before commit
+npm run test:check
+
+# 🧪 Run specific test types
+npm test                    # Unit tests
+npm run e2e:visual         # Visual tests
+npm run e2e:api           # API tests
+npm run e2e:mobile        # Mobile tests
+
+# 📈 Generate coverage report
+npm run test:coverage
+```
+
+**Remember:** Always run `npm run test:check` before committing!
+
+## 🏆 Learning Milestones
+
+### 🥉 **Beginner Level**
+**Goal:** Implement 5 TODOs from any test files
+
+**Recommended path:**
+1. Complete 3 TODOs from `TodoList.test.tsx`
+2. Complete 2 TODOs from `ShoppingCart.test.tsx`
+
+**Validation:** Run `npm run test:progress` - should show ~10% progress
+
+### 🥈 **Intermediate Level**
+**Goal:** Complete all TODOs from 2 test files
+
+**Recommended path:**
+1. Complete all TODOs in `TodoList.test.tsx` (7 TODOs)
+2. Complete all TODOs in `UserSettings.test.tsx` (10 TODOs)
+
+**Validation:** Run `npm run test:validate` - should show 80%+ quality score
+
+### 🥇 **Advanced Level**
+**Goal:** Implement all 78+ TODOs across all test files
+
+**Recommended path:**
+1. Complete all unit tests (50 TODOs)
+2. Complete all E2E tests (26 TODOs)
+3. Achieve 90%+ test coverage
+
+**Validation:** Run `npm run test:check` - everything should pass
+
+### 🏆 **Expert Level**
+**Goal:** Add new test cases beyond the TODOs
+
+**Ideas:**
+- Add edge case tests
+- Implement accessibility tests
+- Add performance tests
+- Create custom test utilities
+
+**Validation:** Maintain 95%+ coverage and contribute back to the project
+
+---
+
+## 🎓 Success Criteria
+
+For each TODO you implement, ensure:
+- [ ] Test passes when you run it
+- [ ] Follows the pattern of existing examples
+- [ ] Uses proper test IDs and assertions
+- [ ] `npm run test:validate` shows good quality score
+- [ ] `npm run test:check` passes all validations
+
+**Remember:** Quality over quantity! It's better to implement fewer tests correctly than many tests poorly.
 
 Happy testing! 🚀

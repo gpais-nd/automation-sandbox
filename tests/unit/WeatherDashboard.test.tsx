@@ -1,5 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, screen, waitFor } from '@testing-library/react'
 import { WeatherDashboard } from '../../src/pages/WeatherDashboard'
 
 describe('WeatherDashboard Component', () => {

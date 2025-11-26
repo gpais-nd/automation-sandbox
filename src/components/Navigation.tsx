@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Home, CheckSquare, User, ShoppingCart, Settings, Cloud, BarChart3 } from 'lucide-react'
+import { Home, CheckSquare, ShoppingCart, Settings, Cloud, BarChart3 } from 'lucide-react'
 
 export function Navigation() {
   const location = useLocation()
@@ -29,7 +29,7 @@ export function Navigation() {
                       ? 'bg-blue-100 text-blue-700'
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                   }`}
-                  data-testid={`nav-${label.toLowerCase().replace(' ', '-')}`}
+                  data-testid={`nav-${label.toLowerCase().replace(/\s+/g, '-')}`}
                 >
                   <Icon size={16} />
                   <span>{label}</span>
