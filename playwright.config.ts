@@ -10,7 +10,9 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:5173',
     trace: 'on-first-retry',
-    screenshot: 'only-on-failure'
+    screenshot: 'only-on-failure',
+    // Enable visual testing
+    video: 'retain-on-failure'
   },
   projects: [
     {
@@ -28,6 +30,14 @@ export default defineConfig({
     {
       name: 'Mobile Chrome',
       use: { ...devices['Pixel 5'] },
+    },
+    {
+      name: 'Mobile Safari',
+      use: { ...devices['iPhone 13'] },
+    },
+    {
+      name: 'Tablet',
+      use: { ...devices['iPad Pro'] },
     }
   ],
   webServer: {
