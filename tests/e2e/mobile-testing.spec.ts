@@ -63,7 +63,7 @@ test.describe('Mobile Testing', () => {
    * Verificar que los botones de cantidad son fáciles de tocar
    * Testear scroll horizontal si hay muchos productos
    */
-  test.skip('shopping cart mobile functionality', async ({ browser }) => {
+  test.skip('shopping cart mobile functionality', async () => {
     // const context = await browser.newContext({
     //   ...devices['Pixel 5']
     // })
@@ -91,7 +91,7 @@ test.describe('Mobile Testing', () => {
    * Verificar que todos los enlaces son accesibles
    * Testear navegación por gestos si está disponible
    */
-  test.skip('mobile navigation functionality', async ({ browser }) => {
+  test.skip('mobile navigation functionality', async () => {
     // const context = await browser.newContext({
     //   ...devices['iPhone 12']
     // })
@@ -119,7 +119,7 @@ test.describe('Mobile Testing', () => {
    * Verificar que el teclado virtual no oculta elementos importantes
    * Testear scroll en formularios largos
    */
-  test.skip('user settings mobile functionality', async ({ browser }) => {
+  test.skip('user settings mobile functionality', async () => {
     // const context = await browser.newContext({
     //   ...devices['Samsung Galaxy S21']
     // })
@@ -150,7 +150,7 @@ test.describe('Mobile Testing', () => {
    * Verificar que las tarjetas del pronóstico se muestran correctamente
    * Testear scroll horizontal en el pronóstico si es necesario
    */
-  test.skip('weather dashboard mobile functionality', async ({ browser }) => {
+  test.skip('weather dashboard mobile functionality', async () => {
     // const context = await browser.newContext({
     //   ...devices['iPhone SE']
     // })
@@ -179,7 +179,7 @@ test.describe('Mobile Testing', () => {
    * Verificar que los gráficos son legibles en pantalla pequeña
    * Testear interacciones táctiles con elementos del gráfico
    */
-  test.skip('dashboard mobile functionality', async ({ browser }) => {
+  test.skip('dashboard mobile functionality', async () => {
     // const context = await browser.newContext({
     //   ...devices['Pixel 7']
     // })
@@ -208,7 +208,7 @@ test.describe('Mobile Testing', () => {
    * Verificar que el layout se adapta correctamente
    * Testear que no se pierde estado al rotar
    */
-  test.skip('device orientation changes', async ({ browser }) => {
+  test.skip('device orientation changes', async () => {
     // const context = await browser.newContext({
     //   ...devices['iPad Pro']
     // })
@@ -237,7 +237,7 @@ test.describe('Mobile Testing', () => {
    * Testear prevención de gestos accidentales
    * Verificar feedback táctil apropiado
    */
-  test.skip('advanced touch gestures', async ({ browser }) => {
+  test.skip('advanced touch gestures', async () => {
     // const context = await browser.newContext({
     //   ...devices['iPhone 14 Pro Max']
     // })
@@ -263,7 +263,7 @@ test.describe('Mobile Testing', () => {
    * Verificar que no hay lag en interacciones táctiles
    * Testear uso de memoria en dispositivos con recursos limitados
    */
-  test.skip('mobile performance testing', async ({ browser }) => {
+  test.skip('mobile performance testing', async () => {
     // const context = await browser.newContext({
     //   ...devices['Moto G4']
     // })
@@ -290,7 +290,7 @@ test.describe('Mobile Testing', () => {
    * Testear diferencias específicas de plataforma
    * Verificar que los estilos se ven correctos en ambas plataformas
    */
-  test.skip('cross-platform mobile consistency', async ({ browser }) => {
+  test.skip('cross-platform mobile consistency', async () => {
     // // Test on iOS device
     // const iosContext = await browser.newContext({
     //   ...devices['iPhone 13']

@@ -53,7 +53,7 @@ test.describe('API Testing', () => {
    * Verificar que los valores se muestran en las tarjetas
    * Testear manejo de errores en la carga de métricas
    */
-  test.skip('dashboard metrics API integration', async ({ page }) => {
+  test.skip('dashboard metrics API integration', async () => {
     // // Mock successful metrics API
     // await page.route('/api/dashboard/metrics', route => {
     //   route.fulfill({
@@ -79,7 +79,7 @@ test.describe('API Testing', () => {
    * Verificar que el gráfico se actualiza al cambiar el tipo
    * Testear estados de loading durante la carga de datos
    */
-  test.skip('chart data API integration', async ({ page }) => {
+  test.skip('chart data API integration', async () => {
     // // Mock chart data API
     // await page.route('/api/dashboard/chart/sales', route => {
     //   route.fulfill({
@@ -118,7 +118,7 @@ test.describe('API Testing', () => {
    * Mockear PUT /api/user/profile para guardar cambios
    * Verificar que se muestran mensajes de éxito/error apropiados
    */
-  test.skip('user settings API integration', async ({ page }) => {
+  test.skip('user settings API integration', async () => {
     // // Mock profile load
     // await page.route('/api/user/profile', route => {
     //   if (route.request().method() === 'GET') {
@@ -148,7 +148,7 @@ test.describe('API Testing', () => {
    * Testear timeouts y errores de red
    * Verificar que se muestran mensajes de error específicos
    */
-  test.skip('API error status codes handling', async ({ page }) => {
+  test.skip('API error status codes handling', async () => {
     // // Test 404 error
     // await page.route('/api/weather/invalid-city', route => {
     //   route.fulfill({
@@ -178,7 +178,7 @@ test.describe('API Testing', () => {
    * Verificar tipos de datos (string, number, boolean)
    * Testear manejo de datos malformados o incompletos
    */
-  test.skip('API data validation', async ({ page }) => {
+  test.skip('API data validation', async () => {
     // // Mock API with invalid data structure
     // await page.route('/api/weather/new-york', route => {
     //   route.fulfill({
@@ -203,7 +203,7 @@ test.describe('API Testing', () => {
    * Testear backoff exponencial si está implementado
    * Verificar que se muestra mensaje apropiado al usuario
    */
-  test.skip('API rate limiting and retry logic', async ({ page }) => {
+  test.skip('API rate limiting and retry logic', async () => {
     // let requestCount = 0
     // 
     // await page.route('/api/weather/*', route => {
@@ -236,7 +236,7 @@ test.describe('API Testing', () => {
    * Testear refresh de tokens automático
    * Verificar redirección a login cuando es necesario
    */
-  test.skip('API authentication and authorization', async ({ page }) => {
+  test.skip('API authentication and authorization', async () => {
     // // Mock unauthorized request
     // await page.route('/api/user/profile', route => {
     //   const authHeader = route.request().headers()['authorization']
@@ -261,7 +261,7 @@ test.describe('API Testing', () => {
    * Verificar invalidación de cache cuando es necesario
    * Testear comportamiento offline con datos cacheados
    */
-  test.skip('API response caching', async ({ page }) => {
+  test.skip('API response caching', async () => {
     // let requestCount = 0
     // 
     // await page.route('/api/weather/new-york', route => {

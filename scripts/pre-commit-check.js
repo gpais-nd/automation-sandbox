@@ -2,64 +2,38 @@
 
 import { execSync } from 'child_process'
 
-function runPreCommitChecks() {
-  console.log('\n🔍 PRE-COMMIT VALIDATION CHECKS\n')
-  
-  const checks = [
-    {
-      name: 'TypeScript Type Check',
-      command: 'npm run type-check',
-      required: true
-    },
-    {
-      name: 'ESLint Code Quality',
-      command: 'npm run lint',
-      required: true
-    },
-    {
-      name: 'Unit Tests',
-      command: 'npm run test:unit-only -- --run',
-      required: true
-    },
-    {
-      name: 'Test Implementation Quality',
-      command: 'node scripts/validate-implementation.js',
-      required: false
-    }
-  ]
-  
-  let allPassed = true
-  
-  checks.forEach(check => {
-    console.log(`🔄 Running: ${check.name}...`)
-    
-    try {
-      execSync(check.command, { 
-        stdio: 'pipe',
-        timeout: 60000 
-      })
-      console.log(`✅ ${check.name}: PASSED`)
-    } catch (error) {
-      console.log(`❌ ${check.name}: FAILED`)
-      
-      if (check.required) {
-        allPassed = false
-        console.log(`   Error: ${error.message}`)
-      } else {
-        console.log(`   Warning: ${error.message}`)
-      }
-    }
-    
-    console.log('')
-  })
-  
-  if (allPassed) {
-    console.log('🎉 All checks passed! Ready to commit.')
-    process.exit(0)
-  } else {
-    console.log('❌ Some required checks failed. Please fix before committing.')
-    process.exit(1)
+const checks = [
+  { name: 'TypeScript Check', cmd: 'npm run type-check', timeout: 30000 },
+  { name: 'ESLint', cmd: 'npm run lint', timeout: 30000 },
+  { name: 'Unit Tests', cmd: 'npm test -- --run', timeout: 60000 },
+  { name: 'Test Validation', cmd: 'npm run test:validate', timeout: 60000 }
+]
+
+console.log('\n🔍 PRE-COMMIT CHECKS\n')
+console.log('='.repeat(60))
+
+let allPassed = true
+
+for (const check of checks) {
+  try {
+    console.log(`\n⏳ Running: ${check.name}...`)
+    execSync(check.cmd, {
+      stdio: 'inherit',
+      timeout: check.timeout
+    })
+    console.log(`✅ ${check.name} passed`)
+  } catch (error) {
+    console.log(`❌ ${check.name} failed`)
+    allPassed = false
   }
 }
 
-runPreCommitChecks()
+console.log('\n' + '='.repeat(60))
+
+if (allPassed) {
+  console.log('\n✅ All checks passed! Ready to commit.\n')
+  process.exit(0)
+} else {
+  console.log('\n❌ Some checks failed. Fix them before committing.\n')
+  process.exit(1)
+}

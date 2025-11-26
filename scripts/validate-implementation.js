@@ -99,7 +99,7 @@ function runTestValidation() {
   console.log('🧪 RUNNING TESTS TO VERIFY IMPLEMENTATION...\n')
   
   try {
-    const testOutput = execSync('npm run test:unit-only -- --reporter=verbose', { 
+    const testOutput = execSync('npm test -- --reporter=verbose', { 
       encoding: 'utf8',
       timeout: 30000 
     })

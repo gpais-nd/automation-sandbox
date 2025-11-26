@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { TodoList } from '../../src/pages/TodoList'
 
@@ -72,7 +72,7 @@ describe('TodoList Component', () => {
 
   /* TODO: Implementar test case para estado vacío
    * Debe verificar que cuando no hay todos se muestre el mensaje
-   * "No todos yet. Add one above!" en el estado vacío
+   * "No todos yet. Add one above!\" en el estado vacío
    */
   test.skip('shows empty state when no todos exist', async () => {
     // const user = userEvent.setup()

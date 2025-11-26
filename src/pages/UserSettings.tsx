@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Save, User, Bell, Shield, Palette } from 'lucide-react'
+import { Save, User, Bell, Palette } from 'lucide-react'
 
 interface UserProfile {
   name: string
